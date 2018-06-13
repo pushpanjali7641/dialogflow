@@ -22,10 +22,10 @@ export let saveEmployee = async (req: Request, res: Response) => {
     console.log(req.body);
 
     let emp:EmployeeEntity = new EmployeeEntity();
-    emp.email = req.body.email;
-    emp.firstName = req.body.firstName;
-    emp.lastName = req.body.lastName;
-    emp.mobile = req.body.mobile;
+    emp.email = req.body.result.parameters.email;
+    emp.firstName = req.body.result.parameters.firstname;
+    emp.lastName = req.body.result.parameters.lastname;
+    emp.mobile = req.body.result.parameters.mobile;
 
     empRepo.saveEmployee(emp).then((result: any) => {
         console.log("Result : " + result);
