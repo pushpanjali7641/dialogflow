@@ -1,46 +1,54 @@
-import * as express from 'express';
-import * as bodyParser from "body-parser";
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import * as appConfig from "./common/app-config";
+// import * as Koa from "koa";
+// import * as bodyParser from "koa-bodyparser";
+// import * as logger from "koa-logger";
+// import * as Router from "koa-router";
 
-/**
- * Controllers (route handlers).
- */
-import * as empController from "./controllers/employee-controller";
+// import { createConnection } from "typeorm";
+// import { Inject } from "typescript-ioc";
 
-/**
- * Create Express server.
- */
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-/**
- * Express configuration.
- */
-app.set("port", process.env.PORT || 3000);
+// import Director from "./models/Director";
+// import Route from "./models/Route";
+// import DirectorRoutes from "./routes/DirectorRoutes";
 
-/**
- * Start Express server.
- */
-app.listen(app.get("port"), () => {
-    console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));
-    console.log("  Press CTRL-C to stop\n");
-});
+// export default class App {
 
-/**
- * Primary app routes.
- */
-app.get("/GetAllEmployees", empController.getAllEmployees);
-app.post("/SaveEmployee", empController.saveEmployee);
+//     constructor(
+//         @Inject private directorRoutes: DirectorRoutes) { }
 
-/**
- * Create connection to DB using configuration provided in 
- * appconfig file.
- */
-createConnection(appConfig.dbOptions).then(async connection => {
-    console.log("Connected to DB");
+//     private async createApp() {
+//         await createConnection({
 
-}).catch(error => console.log("TypeORM connection error: ", error));
+//             type: "mysql",
+//             host: "localhost",
+//             port: 3306,
+//             username: "root",
+//             password: "",           //password for the database
+//             database: "finanalytics",     //name of the database
+//             entities: [
+//                 Director,                   //include models here
+//             ],
+//             synchronize: true,
+//         });
 
-module.exports = app;
+//         const app: Koa = new Koa();
+//         const router: Router = new Router();
+
+//         //register router
+//         this.directorRoutes.register(router);
+
+//         app.use(logger());
+//         app.use(bodyParser());
+//         app.use(router.routes());
+//         app.use(router.allowedMethods());
+
+//         return Promise.resolve(app);
+//     }
+
+//     public async start() {
+//         const app = await this.createApp();
+//         console.log("Started listening on port 3000...");
+//         const server = app.listen(3000);
+//         return Promise.resolve(server);
+//     }
+
+// }
